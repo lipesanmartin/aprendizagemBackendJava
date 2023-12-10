@@ -38,6 +38,17 @@ public class ChapterAssuntoService {
         return chapterAssuntoRepository.getAllNoticias();
     }
 
+    @Transactional
+    public ChapterAssunto getNoticiaById(Integer id) {
+        return chapterAssuntoRepository.getNoticiaById(id);
+    }
+
+    @Transactional
+    public Integer getQuantidadeNoticias() {
+        return chapterAssuntoRepository.getQuantidadeNoticias();
+    }
+
+
 
     @Transactional
     public ChapterAssunto postChapterAssunto(ChapterAssunto chapterAssunto) {
@@ -66,6 +77,8 @@ public class ChapterAssuntoService {
         }
         return ResponseEntity.ok().body(chapterAssuntoDtos);
     }
+
+
 
     public void deleteChapterAssunto(Integer id) {
         chapterAssuntoRepository.deleteById(id);

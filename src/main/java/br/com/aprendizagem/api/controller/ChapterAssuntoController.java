@@ -40,6 +40,21 @@ public class ChapterAssuntoController {
         return ResponseEntity.ok(chapterAssuntoService.getAllNoticias());
     }
 
+    @GetMapping("/noticias/{id}")
+    public ResponseEntity<ChapterAssunto> getNoticiaById(@PathVariable Integer id) {
+        ChapterAssunto chapterAssunto = chapterAssuntoService.getNoticiaById(id);
+        if (chapterAssunto != null) {
+            return ResponseEntity.ok().body(chapterAssunto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/quantidade-noticias")
+    public ResponseEntity<Integer> getQuantidadeNoticias() {
+        return ResponseEntity.ok(chapterAssuntoService.getQuantidadeNoticias());
+    }
+
     @GetMapping("/filtrar-chapter-assuntos-por-chapter-id/{chapterId}")
     public ResponseEntity<List<ChapterAssunto>> filterChapterAssuntosByChapterId(@PathVariable Integer chapterId) {
         return chapterAssuntoService.filterChapterAssuntosByChapterId(chapterId);
