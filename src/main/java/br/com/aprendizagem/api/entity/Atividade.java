@@ -2,7 +2,6 @@ package br.com.aprendizagem.api.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -42,10 +41,9 @@ public class Atividade {
     @Column(name = "atividade_status")
     private Integer status;
 
-    @JsonBackReference
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="situacao_aprendizagem_id")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private SituacaoAprendizagem situacaoAprendizagem;
 
     @ManyToOne
@@ -55,7 +53,5 @@ public class Atividade {
     @ManyToOne
     @JoinColumn(name ="grau_dificuldade_id")
     private GrauDificuldade grauDificuldade;
-
-
 
 }
