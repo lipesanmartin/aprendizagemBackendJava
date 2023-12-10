@@ -1,6 +1,7 @@
 package br.com.aprendizagem.api.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -64,6 +65,7 @@ public class SituacaoAprendizagem {
         inverseJoinColumns = @JoinColumn(name = "objeto_aprendizagem_id"))
     private Set<ObjetoAprendizagem> objetosAprendizagem = new HashSet<>();
 
+    @JsonManagedReference
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "situacaoAprendizagem")
     private List<Atividade> atividades = new ArrayList<>();
 }

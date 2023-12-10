@@ -46,6 +46,7 @@ public class ObjetoAprendizagem {
     @JoinColumn(name ="grau_dificuldade_id")
     private GrauDificuldade grauDificuldade;
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "objeto_aprendizagem_recurso",

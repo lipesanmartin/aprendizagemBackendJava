@@ -22,4 +22,13 @@ public class AtividadeService {
         }
         return ResponseEntity.ok(atividades);
     }
+
+    @Transactional
+    public ResponseEntity<List<Atividade>> getAtividadesSemAcompanhamento() {
+        List<Atividade> atividades = atividadeRepository.getAtividadesSemAcompanhamento();
+        if (atividades.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(atividades);
+    }
 }

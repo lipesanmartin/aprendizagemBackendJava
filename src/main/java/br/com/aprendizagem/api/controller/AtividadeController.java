@@ -20,4 +20,9 @@ public class AtividadeController {
         return atividadeService.getActiveAtividades();
     }
 
+    @GetMapping("/sem-acompanhamento")
+    public ResponseEntity<List<Atividade>> getAtividadesSemAcompanhamento(){
+        return atividadeService.getAtividadesSemAcompanhamento();
+    }
+
 }
