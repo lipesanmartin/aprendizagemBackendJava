@@ -44,6 +44,16 @@ public class ChapterAssuntoComentarioController {
         return ResponseEntity.ok().body(chapterAssuntoComentarioService.postChapterAssuntoComentario(chapterAssuntoComentario));
     }
 
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<ChapterAssuntoComentario> putChapterAssuntoComentario(@PathVariable Long id, @RequestBody String resposta) {
+        ChapterAssuntoComentario chapterAssuntoComentario = chapterAssuntoComentarioService.atualizarResposta(id, resposta);
+        if (chapterAssuntoComentario != null) {
+            return ResponseEntity.ok().body(chapterAssuntoComentario);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteChapterAssuntoComentarioById(@PathVariable Integer id) {
         chapterAssuntoComentarioService.deleteChapterAssuntoComentarioById(id);

@@ -6,6 +6,7 @@ import br.com.aprendizagem.api.repository.ChapterAssuntoComentarioRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +20,12 @@ public class ChapterAssuntoComentarioService {
 
     private final UsuarioService usuarioService;
 
+    @Transactional
     public List<ChapterAssuntoComentario> getAllChapterAssuntoComentario() {
         return chapterAssuntoComentarioRepository.findAll();
     }
 
+    @Transactional
     public ChapterAssuntoComentario getChapterAssuntoComentarioById(Long id) {
         ChapterAssuntoComentario chapterAssuntoComentario = chapterAssuntoComentarioRepository.getChapterAssuntoComentarioById(id);
        if (chapterAssuntoComentario != null) {
@@ -32,6 +35,7 @@ public class ChapterAssuntoComentarioService {
        }
     }
 
+    @Transactional
     public ChapterAssuntoComentario postChapterAssuntoComentario(ChapterAssuntoComentarioDto chapterAssuntoComentarioDto) {
         ChapterAssuntoComentario chapterAssuntoComentario = new ChapterAssuntoComentario();
         chapterAssuntoComentario.setTexto(chapterAssuntoComentarioDto.getTexto());
@@ -45,10 +49,12 @@ public class ChapterAssuntoComentarioService {
         return chapterAssuntoComentarioRepository.save(chapterAssuntoComentario);
     }
 
+    @Transactional
     public void deleteChapterAssuntoComentarioById(Integer id) {
         chapterAssuntoComentarioRepository.deleteById(id);
     }
 
+    @Transactional
     public List<ChapterAssuntoComentario> filterByChapterAssuntoId(Integer chapterAssuntoId) {
         return chapterAssuntoComentarioRepository.findByChapterAssuntoId(chapterAssuntoId);
     }
@@ -61,6 +67,7 @@ public class ChapterAssuntoComentarioService {
 //        return chapterAssuntoComentarioRepository.findAllComentarioPaiByChapterAssuntoId(chapterAssuntoId);
 //    }
 
+    @Transactional
     public List<ChapterAssuntoComentarioDto> getAllChapterAssuntoComentarioDto() {
         List<ChapterAssuntoComentario> chapterAssuntoComentarios = chapterAssuntoComentarioRepository.findAll();
         List<ChapterAssuntoComentarioDto> chapterAssuntoComentarioDtos = new ArrayList<>();
@@ -71,6 +78,7 @@ public class ChapterAssuntoComentarioService {
         return chapterAssuntoComentarioDtos;
     }
 
+    @Transactional
     public List<ChapterAssuntoComentarioDto> getAllChapterAssuntoComentarioDtoByChapterAssuntoId(Integer chapterAssuntoId) {
         List<ChapterAssuntoComentario> chapterAssuntoComentarios = chapterAssuntoComentarioRepository.findByChapterAssuntoId(chapterAssuntoId);
         List<ChapterAssuntoComentarioDto> chapterAssuntoComentarioDtos = new ArrayList<>();
@@ -80,6 +88,14 @@ public class ChapterAssuntoComentarioService {
         }
         return chapterAssuntoComentarioDtos;
     }
+
+    @Transactional
+    public ChapterAssuntoComentario atualizarResposta(Long id, String resposta) {
+        ChapterAssuntoComentario chapterAssuntoComentario = chapterAssuntoComentarioRepository.getChapterAssuntoComentarioById(id);
+        chapterAssuntoComentario.setTexto(resposta);
+        return chapterAssuntoComentarioRepository.save(chapterAssuntoComentario);
+    }
+
 
     public ChapterAssuntoComentarioDto buildDto(ChapterAssuntoComentario chapterAssuntoComentario, ChapterAssuntoComentarioDto chapterAssuntoComentarioDto) {
         chapterAssuntoComentarioDto.setId(chapterAssuntoComentario.getId());
